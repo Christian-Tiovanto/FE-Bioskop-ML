@@ -218,8 +218,8 @@ const MovieDetail = ({ movie, onDeselectMovie, onAddComment }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50 p-4 animate-fade-in">
-      <div className="bg-gray-900 rounded-2xl w-full max-w-4xl max-h-[90vh] flex flex-col">
+    <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-start z-50 p-4 animate-fade-in overflow-y-auto">
+      <div className="bg-gray-900 rounded-2xl w-full max-w-4xl flex flex-col">
         <div className="relative flex-shrink-0 flex flex-col md:flex-row">
           {/* Close button */}
           <button
@@ -285,15 +285,15 @@ const MovieDetail = ({ movie, onDeselectMovie, onAddComment }) => {
         </div>
 
         {/* Comments Section */}
-        <div className="flex-grow p-8 pt-0 flex flex-col overflow-hidden">
-          <div className="border-t border-gray-700 pt-6 mb-4">
-            <h3 className="text-xl font-bold text-cyan-400 flex items-center">
-              Comments
-              <span className="ml-2 bg-gray-700 text-cyan-400 text-xs font-semibold px-2.5 py-0.5 rounded-full">
-                {movie.comments.length}
-              </span>
-            </h3>
-          </div>
+        <div className="border-t border-gray-700 pt-6 mb-4 ml-10">
+          <h3 className="text-xl font-bold text-cyan-400 flex items-center">
+            Comments
+            <span className="ml-2 bg-gray-700 text-cyan-400 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+              {movie.comments.length}
+            </span>
+          </h3>
+        </div>
+        <div className="p-8 pt-0 max-h-60 overflow-y-auto">
           <div className="flex-grow overflow-y-auto mb-4 bg-gray-800/50 rounded-lg">
             {movie.comments.length > 0 ? (
               movie.comments.map((c) => <Comment key={c.id} comment={c} />)
@@ -303,48 +303,48 @@ const MovieDetail = ({ movie, onDeselectMovie, onAddComment }) => {
               </p>
             )}
           </div>
-          <form onSubmit={handleSubmit} className="flex-shrink-0">
-            <textarea
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              className="w-full bg-gray-800 text-white p-3 rounded-lg border-2 border-gray-700 focus:border-cyan-500 focus:outline-none transition"
-              placeholder="Add a public comment..."
-              rows="3"
-            ></textarea>
-            <div className="flex justify-between items-center mt-3">
-              <div className="flex items-center space-x-2">
-                <button
-                  type="button"
-                  onClick={() => setIsGood(true)}
-                  className={`px-3 py-1 rounded-full text-sm font-semibold transition ${
-                    isGood
-                      ? "bg-green-500 text-white"
-                      : "bg-gray-700 text-gray-300"
-                  }`}
-                >
-                  Like
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setIsGood(false)}
-                  className={`px-3 py-1 rounded-full text-sm font-semibold transition ${
-                    !isGood
-                      ? "bg-red-500 text-white"
-                      : "bg-gray-700 text-gray-300"
-                  }`}
-                >
-                  Dislike
-                </button>
-              </div>
+        </div>
+        <form onSubmit={handleSubmit} className="flex-shrink-0 mt-4">
+          <textarea
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            className="w-full bg-gray-800 text-white p-3 rounded-lg border-2 border-gray-700 focus:border-cyan-500 focus:outline-none transition"
+            placeholder="Add a public comment..."
+            rows="3"
+          ></textarea>
+          <div className="flex justify-between items-center mt-3">
+            <div className="flex items-center space-x-2">
               <button
-                type="submit"
-                className="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-6 rounded-lg transition"
+                type="button"
+                onClick={() => setIsGood(true)}
+                className={`px-3 py-1 rounded-full text-sm font-semibold transition ${
+                  isGood
+                    ? "bg-green-500 text-white"
+                    : "bg-gray-700 text-gray-300"
+                }`}
               >
-                Comment
+                Like
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsGood(false)}
+                className={`px-3 py-1 rounded-full text-sm font-semibold transition ${
+                  !isGood
+                    ? "bg-red-500 text-white"
+                    : "bg-gray-700 text-gray-300"
+                }`}
+              >
+                Dislike
               </button>
             </div>
-          </form>
-        </div>
+            <button
+              type="submit"
+              className="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-6 rounded-lg transition"
+            >
+              Comment
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
