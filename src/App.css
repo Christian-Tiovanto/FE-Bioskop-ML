@@ -1,1 +1,12 @@
 @import "tailwindcss";
+:root {
+  --main-bg-color: #212631;
+  --main-text-color: white;
+  --second-bg-color: #f3f4f7;
+  --second-text-color: black;
+  --third-bg-color: #f0f0f0;
+}
+
+#root {
+  height: 100%;
+}
